@@ -1,11 +1,19 @@
-﻿namespace HeritageAI;
+﻿using Google.Cloud.Speech.V2;
+
+namespace HeritageAI;
 
 using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.IO;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
+        //Console.WriteLine($"[DEBUG] GOOGLE_APPLICATION_CREDENTIALS = {Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS")}");
+        
+        
         var recorder = new WaveRecorder();
         Console.WriteLine("Press 'r' to start recording");
         
@@ -20,6 +28,10 @@ class Program
             else if (key == 's')
             {
                 recorder.StopRecording();
+                Console.WriteLine("Recording stopped. Transcribing...");
+
+                string transcription = await SpeechToText.Convert(recorder.OutputFilePath);
+                Console.WriteLine($"Transcription: {transcription}");
             }
             else if (key == 'q')
             {
