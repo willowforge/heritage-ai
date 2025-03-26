@@ -1,11 +1,11 @@
-﻿namespace HeritageAI;
-
-using Google.Cloud.Speech.V2;
+﻿using Google.Cloud.Speech.V2;
 using Google.Protobuf;
 using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+
+namespace HeritageAI;
 
 public class SpeechToText
 {

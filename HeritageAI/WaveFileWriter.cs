@@ -1,6 +1,6 @@
-﻿namespace HeritageAI;
+﻿using NAudio.Wave;
 
-using NAudio.Wave;
+namespace HeritageAI;
 
 class WaveRecorder
 {
