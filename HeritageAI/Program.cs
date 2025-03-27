@@ -15,18 +15,17 @@ class Program
         
         
         var recorder = new WaveRecorder();
-        Console.WriteLine("Press 'r' to start recording\n");
+        Console.WriteLine("Press 'F4' to start recording. Press 'Q' to quit\n");
         
         while (true)
         {
-            var key = Console.ReadKey().KeyChar;
-            if (key == 'r')
+            var key = Console.ReadKey(true).Key;
+            if (key == ConsoleKey.F4)
             {
                 recorder.StartRecording();
-                Console.WriteLine("Recording started\n");
-                Console.WriteLine("Press 's' to stop recording\n");
+                Console.WriteLine("Recording started\nPress 'P' to stop recording\n");
             }
-            else if (key == 's')
+            else if (key == ConsoleKey.P)
             {
                 recorder.StopRecording();
                 Console.WriteLine("Recording stopped. Transcribing...\n");
@@ -59,9 +58,9 @@ class Program
                     Console.WriteLine("Playback finished.\n");
                 }
                 
-                Console.WriteLine("Press 'r' to start recording\n");
+                Console.WriteLine("Press 'F4' to start recording, or press 'Q' to quit\n");
             }
-            else if (key == 'q')
+            else if (key == ConsoleKey.Q)
             {
                 break;
             }

@@ -12,9 +12,9 @@ public class TextToSpeech
     {
         string subscriptionKey = Environment.GetEnvironmentVariable("AZURE_SPEECH_KEY");
 
-        if (string.IsNullOrEmpty(subscriptionKey) || string.IsNullOrEmpty("eastus"))
+        if (string.IsNullOrEmpty(subscriptionKey))
         {
-            Console.Error.WriteLine("Azure Speech subscription key or region is not set.");
+            Console.Error.WriteLine("Azure Text-To-Speech subscription key is not set.");
             return null;
         }
 
