@@ -27,13 +27,11 @@ class WaveRecorder
         
         waveFileWriter = new WaveFileWriter(outputFilePath, waveIn.WaveFormat);
         
-        // Buffer the audio data as it's captured to avoid memory overload
         waveIn.DataAvailable += (s, e) =>
         {
             waveFileWriter.Write(e.Buffer, 0, e.BytesRecorded);
         };
-
-        // Dispose of resources immediately when recording stops to avoid locking the file
+        
         waveIn.RecordingStopped += (s, e) =>
         {
             waveFileWriter?.Dispose();
@@ -42,7 +40,7 @@ class WaveRecorder
         };
         
         waveIn.StartRecording();
-        Console.WriteLine("Starting recording...");
+        Debug.Info("Starting recording...");
     }
 
     public void StopRecording()
@@ -50,8 +48,8 @@ class WaveRecorder
         if (waveIn != null)
         {
             waveIn.StopRecording();
-            Console.WriteLine("Stopping recording...");
-            Console.WriteLine($"Audio saved to: {outputFilePath}");
+            Debug.Info("Stopping recording...");
+            Debug.Info($"Audio saved to: {outputFilePath}");
         }
     }
 }

@@ -11,7 +11,7 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        //Console.WriteLine($"[DEBUG] GOOGLE_APPLICATION_CREDENTIALS = {Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS")}");
+        //Debug.Info($"GOOGLE_APPLICATION_CREDENTIALS = {Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS")}");
         
         
         var recorder = new WaveRecorder();
@@ -28,23 +28,23 @@ class Program
             else if (key == ConsoleKey.P)
             {
                 recorder.StopRecording();
-                Console.WriteLine("Recording stopped. Transcribing...\n");
+                Debug.Info("Recording stopped. Transcribing...\n");
 
                 string transcription = await SpeechToText.Convert(recorder.OutputFilePath);
-                Console.WriteLine($"Transcription: \n{transcription}\n");
+                Debug.Info($"Transcription: \n{transcription}\n");
                 
                 string response = await OpenAIChat.GetAIResponse(transcription);
-                Console.WriteLine($"Response: \n{response}\n");
+                Debug.Info($"Response: \n{response}\n");
 
                 string outputPath = Path.Combine("speech", "teddy_response.wav");
                 Directory.CreateDirectory("speech");
                 
                 string audioPath = await TextToSpeech.GenerateSpeechAsync(response, outputPath);
-                Console.WriteLine($"Audio file created at: \n{audioPath}\n");
+                Debug.Info($"Audio file created at: \n{audioPath}\n");
 
                 if (!string.IsNullOrEmpty(audioPath))
                 {
-                    Console.WriteLine("Playing audio...\n");
+                    Debug.Info("Playing audio...\n");
                     using var audioFile = new AudioFileReader(audioPath);
                     using var outputDevice = new WaveOutEvent();
                     outputDevice.Init(audioFile);
@@ -55,7 +55,7 @@ class Program
                         await Task.Delay(100);
                     }
                     
-                    Console.WriteLine("Playback finished.\n");
+                    Debug.Info("Playback finished.\n");
                 }
                 
                 Console.WriteLine("Press 'F4' to start recording, or press 'Q' to quit\n");

@@ -48,7 +48,7 @@ public class SpeechToText
                 Content = ByteString.CopyFrom(audioBytes),
             };
             
-            //Console.WriteLine($"Sending request with: {audioBytes.Length} bytes | Model: {request.Config.Model} | Language code: {request.Config.LanguageCodes}");
+            Debug.Info($"Sending request with: {audioBytes.Length} bytes | Model: {request.Config.Model} | Language code: {request.Config.LanguageCodes}");
 
             var response = await client.RecognizeAsync(request);
 
@@ -60,16 +60,18 @@ public class SpeechToText
         }
         catch (InvalidOperationException ex) when (ex.Message.Contains("default credentials"))
         {
-            Console.Error.WriteLine("Google Cloud default credentials not found.");
-            Console.WriteLine("Make sure you have set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of your service account key (.json file).");
-            Console.WriteLine("See: https://cloud.google.com/docs/authentication/external/set-up-adc");
-            Console.WriteLine($"Details: {ex.Message}");
+            Debug.Error("" +
+                        "Google Cloud default credentials not found.Make sure you have set the" +
+                        " GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of y" +
+                        "our service account key (.json file).See: https://cloud.google.com/do" +
+                        "cs/authentication/external/set-up-adc");
+            Debug.Error($"Details: {ex.Message}");
             return string.Empty;
         }
         catch (Exception ex)
         {
-            Console.Error.WriteLine("An unexpected error occurred during speech-to-text conversion.");
-            Console.WriteLine($"Details: {ex.Message}");
+            Debug.Error("An unexpected error occurred during speech-to-text conversion.");
+            Debug.Error($"Details: {ex.Message}");
             return string.Empty;
         }
     }

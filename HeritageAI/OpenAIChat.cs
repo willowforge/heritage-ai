@@ -30,12 +30,15 @@ public class OpenAIChat
     public static async Task<string> GetAIResponse(string transcription)
     {
         if (string.IsNullOrEmpty(transcription))
+        {
+            Debug.Error("OpenAIChat transcription is null or empty");
             return "[no input to respond to.";
-        
+        }
+
         string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
         if (string.IsNullOrEmpty(apiKey))
         {
-            Console.Error.WriteLine("OpenAI API key environment variable is not set.");
+            Debug.Error("OpenAI API key environment variable is not set.");
             return "[Missing API key]";
         }
 
@@ -69,7 +72,7 @@ public class OpenAIChat
 
         try
         {
-            Console.WriteLine("Getting response from ChatGPT...");
+            Debug.Info("Getting response from ChatGPT...");
             var response = await Client.PostAsync("https://api.openai.com/v1/chat/completions", content);
             response.EnsureSuccessStatusCode();
 
@@ -82,12 +85,12 @@ public class OpenAIChat
         }
         catch (HttpRequestException ex)
         {
-            Console.Error.WriteLine($"[ERROR] HTTP request failed: {ex.Message}");
+            Debug.Error($"HTTP request failed: {ex.Message}");
             return "[Failed to contact AI]";
         }
         catch (Exception ex)
         {
-            Console.Error.WriteLine($"[ERROR] Unexpected error: {ex.Message}");
+            Debug.Error($"Unexpected error: {ex.Message}");
             return "[AI Response failed]";
         }
         

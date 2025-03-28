@@ -14,7 +14,7 @@ public class TextToSpeech
 
         if (string.IsNullOrEmpty(subscriptionKey))
         {
-            Console.Error.WriteLine("Azure Text-To-Speech subscription key is not set.");
+            Debug.Error("Azure Text-To-Speech subscription key is not set.");
             return null;
         }
 
@@ -29,17 +29,17 @@ public class TextToSpeech
 
         if (result.Reason == ResultReason.SynthesizingAudioCompleted)
         {
-            Console.WriteLine($"Speech synthesized and saved to: {outputFilePath}");
+            Debug.Info($"Speech synthesized and saved to: {outputFilePath}");
             return outputFilePath;
         }
-        else if (result.Reason == ResultReason.Canceled)
+        if (result.Reason == ResultReason.Canceled)
         {
             var cancellation = SpeechSynthesisCancellationDetails.FromResult(result);
-            Console.WriteLine($"CANCELED: Reason={cancellation.Reason}");
+            Debug.Error($"CANCELED: Reason={cancellation.Reason}");
             if (cancellation.Reason == CancellationReason.Error)
             {
-                Console.WriteLine($"ErrorCode={cancellation.ErrorCode}");
-                Console.WriteLine($"ErrorDetails=[{cancellation.ErrorDetails}]");
+                Debug.Error($"ErrorCode={cancellation.ErrorCode}");
+                Debug.Error($"ErrorDetails=[{cancellation.ErrorDetails}]");
             }
         }
 
