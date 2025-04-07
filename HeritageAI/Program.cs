@@ -36,7 +36,7 @@ class Program
                 string response = await OpenAIChat.GetAIResponse(transcription);
                 Debug.Info($"Response: \n{response}\n");
 
-                string outputPath = Path.Combine("speech", "audio.wav");
+                string outputPath = Path.Combine("speech", "audio.mp3");
                 Directory.CreateDirectory("speech");
                 
                 string audioPath = await TextToSpeech.GenerateSpeechAsync(response, outputPath);
@@ -45,7 +45,7 @@ class Program
                 if (!string.IsNullOrEmpty(audioPath))
                 {
                     Debug.Info("Playing audio...\n");
-                    using var audioFile = new AudioFileReader(audioPath);
+                    using var audioFile = new MediaFoundationReader(audioPath);
                     using var outputDevice = new WaveOutEvent();
                     outputDevice.Init(audioFile);
                     outputDevice.Play();
