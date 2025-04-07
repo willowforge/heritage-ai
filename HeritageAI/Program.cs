@@ -36,7 +36,7 @@ class Program
                 string response = await OpenAIChat.GetAIResponse(transcription);
                 Debug.Info($"Response: \n{response}\n");
 
-                string outputPath = Path.Combine("speech", "teddy_response.wav");
+                string outputPath = Path.Combine("speech", "audio.wav");
                 Directory.CreateDirectory("speech");
                 
                 string audioPath = await TextToSpeech.GenerateSpeechAsync(response, outputPath);

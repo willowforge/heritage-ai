@@ -10,16 +10,16 @@ public class TextToSpeech
 {
     public static async Task<string> GenerateSpeechAsync(string text, string outputFilePath)
     {
-        string subscriptionKey = Environment.GetEnvironmentVariable("AZURE_SPEECH_KEY");
+        string subscriptionKey = Environment.GetEnvironmentVariable("AZURE_SPEECH_KEY"); // don't forget to set in environemnt variables
 
         if (string.IsNullOrEmpty(subscriptionKey))
         {
-            Debug.Error("Azure Text-To-Speech subscription key is not set.");
+            Debug.Error("Azure Text-To-Speech subscription key is not set.");   
             return null;
         }
 
         var config = SpeechConfig.FromSubscription(subscriptionKey, "eastus");
-        config.SpeechSynthesisVoiceName = "en-US-AdamMultilingualNeural";
+        config.SpeechSynthesisVoiceName = "g6XTfKskXxj7LA6IIN60"; // ElevenLabs voice model ID
 
         // Create the output audio file stream
         var audioConfig = AudioConfig.FromWavFileOutput(outputFilePath);

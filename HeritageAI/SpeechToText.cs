@@ -60,11 +60,7 @@ public class SpeechToText
         }
         catch (InvalidOperationException ex) when (ex.Message.Contains("default credentials"))
         {
-            Debug.Error("" +
-                        "Google Cloud default credentials not found.Make sure you have set the" +
-                        " GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of y" +
-                        "our service account key (.json file).See: https://cloud.google.com/do" +
-                        "cs/authentication/external/set-up-adc");
+            Debug.Error(@"Google Cloud default credentials not found. Make sure you have set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of your service account key (.json file).See: https://cloud.google.com/docs/authentication/external/set-up-adc");
             Debug.Error($"Details: {ex.Message}");
             return string.Empty;
         }
