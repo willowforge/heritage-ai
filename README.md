@@ -11,7 +11,7 @@ Console interface for simple interaction and testing
 Debug logging for tracing execution and issues
 
 Setup Instructions:
-  Prerequisites:
+Prerequisites:
     Windows OS
     .NET 9.0 SDK
     Google Cloud SDK
@@ -43,13 +43,14 @@ Running the Project:
 Transcribed audio is printed to the console
 AI response is played back
 waves/audio.wav: Your raw recorded voice
-speech/audio.wav: AI-generated response
+speech/audio.mp3: AI-generated response
 
 Notes for Developers
   Voice playback uses NAudio for asynchronous streaming
   ElevenLabs configuration uses the voice model ID now instead of its name, you can find this by clicking the 'ID' button 
   Transcription uses Google Cloud Speech V2 with the "latest_long" model
-  OpenAI prompts are custom-engineered to preserve historical accuracy and tone
+  Edit the Content section of the first message in OpenAIChat.cs to customize the character.
+  Don't forget to set your enviornment variables and ElevenLabs voice model
 
 Features to be implemented:
-  Simple GUI for ease of use including character personality customization and 
+  Simple GUI for ease of use including character personality customization
