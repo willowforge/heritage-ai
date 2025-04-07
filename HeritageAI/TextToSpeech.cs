@@ -10,7 +10,7 @@ public class TextToSpeech
 {
     public static async Task<string> GenerateSpeechAsync(string text, string outputFilePath)
     {
-        string subscriptionKey = Environment.GetEnvironmentVariable("AZURE_SPEECH_KEY"); // don't forget to set in environemnt variables
+        string subscriptionKey = Environment.GetEnvironmentVariable("ELEVENLABS_SPEECH_KEY"); // don't forget to set in environemnt variables
 
         if (string.IsNullOrEmpty(subscriptionKey))
         {
