@@ -27,8 +27,6 @@ Prerequisites:
     ELEVENLABS_SPEECH_KEY=<your-elevenlabs-speech-key> // API key from elevenlabs
   These can be configured via System Properties > Environment Variables on Windows.
 
-  Currently the pro
-
 Running the Project:
   1. Clone the project and open in JetBrains Rider or your preferred IDE
   2. Ensure the above environment variables are correctly set
